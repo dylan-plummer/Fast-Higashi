@@ -556,7 +556,8 @@ class FastHigashi():
 
 		print("recommend_bs_cell", recommend_bs_cell, "pinning memory")
 		all_matrix = tensor_list
-		if self.device != 'cpu':
+		if torch.cuda.is_available():
+			print(self.device)
 			for i in range(len(all_matrix)):
 				all_matrix[i].pin_memory()
 		gc.collect()
