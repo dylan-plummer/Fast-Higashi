@@ -556,8 +556,9 @@ class FastHigashi():
 
 		print("recommend_bs_cell", recommend_bs_cell, "pinning memory")
 		all_matrix = tensor_list
-		for i in range(len(all_matrix)):
-			all_matrix[i].pin_memory()
+		if self.device != 'cpu':
+			for i in range(len(all_matrix)):
+				all_matrix[i].pin_memory()
 		gc.collect()
 		shape_list = np.stack([mtx.shape[:-1] for mtx in all_matrix])
 		# print(shape_list, np.sum(shape_list[:, 0]))
